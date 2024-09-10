@@ -30,7 +30,7 @@ class STTApp:
         self.model = self.load_whisper_model()
 
         # Create a mic button (this will trigger the STT function later)
-        self.mic_button = ttk.Button(root, text="🎤", command=self.start_stt)
+        self.mic_button = ttk.Button(root, text="Record", command=self.toggle_stt)
         self.mic_button.pack(expand=True)
 
         # Create a status indicator
@@ -46,7 +46,7 @@ class STTApp:
         close_button.pack(side="bottom")
 
         # Detect hotkey activation
-        keyboard.add_hotkey('ctrl+shift+7', self.start_stt)
+        keyboard.add_hotkey('ctrl+shift+7', self.toggle_stt)
 
         # Variable for window dragging
         self._offsetx = 0
@@ -55,12 +55,16 @@ class STTApp:
         # Audio variables
         self.is_recording = False
         self.samplerate = 16000  # Whisper prefers 16kHz
-        self.silence_threshold = 0.5  # Silence detection threshold
-        self.silence_duration = 0.5  # Time of silence to stop recording
+        self.chunk_size = 1024
 
     def load_whisper_model(self):
-        print("Loading Whisper model into GPU...")
-        model = whisper.load_model("medium.en")
+        if torch.cuda.is_available():
+            print("Loading Whisper model into GPU...")
+            model = whisper.load_model("medium.en", device="cuda")
+        else:
+            print("Loading Whisper model into CPU...")
+            model = whisper.load_model("medium.en", device="cpu")
+
         return model
 
     def unload_whisper_model(self):
@@ -82,38 +86,43 @@ class STTApp:
             self.is_recording = True
             self.update_status("recording")
             threading.Thread(target=self.record_audio).start()
+    
+    def toggle_stt(self):
+        if not self.is_recording:
+            print("Starting recording...")
+            self.start_stt()
+        else:
+            print("Stopping recording...")
+            self.is_recording = False
 
     def record_audio(self):
         print("Recording started...")
 
         audio_data = []
-        silent_chunks = 0
+        np_audio_data = np.array([])
 
         def callback(indata, frames, time, status):
-            nonlocal silent_chunks
-            volume_norm = np.linalg.norm(indata)
-            audio_data.append(indata.copy())
 
-            # Check for silence
-            if volume_norm < self.silence_threshold:
-                silent_chunks += 1
-            else:
-                silent_chunks = 0
+            nonlocal np_audio_data
+            nonlocal audio_data
 
-            print(f"V: {volume_norm} | S: {silent_chunks} | T: {int(self.silence_duration * self.samplerate / frames)}")
-
-            # Stop recording after certain silence duration
-            if silent_chunks > int(self.silence_duration * self.samplerate / frames):
-                print("Silence detected, stopping recording.")
+            if not self.is_recording:
                 raise sd.CallbackStop()
+            
+            audio_data.append(indata.copy())
+            
+            print(f"T: {len(audio_data) * frames / self.samplerate}")
 
-        with sd.InputStream(callback=callback, channels=1, samplerate=self.samplerate, dtype='float32'):
-            sd.sleep(10000)  # Run the stream for 10 seconds max or until silence is detected
+            # If the audio_data > 3 seconds, then transcribe
+            if len(audio_data) * frames / self.samplerate > 3:
+                print("Transcribing...")
+                np_audio_data = np.concatenate(audio_data, axis=0)
+                audio_data = []
+                threading.Thread(target=self.transcribe_audio, args=(np_audio_data,)).start()
 
-        self.is_recording = False
-        audio_data = np.concatenate(audio_data, axis=0)
-        self.update_status("transcribing")
-        threading.Thread(target=self.transcribe_audio, args=(audio_data,)).start()
+        with sd.InputStream(callback=callback, channels=1, samplerate=self.samplerate, blocksize=self.chunk_size, dtype='float32'):
+            while self.is_recording:
+                sd.sleep(100)
 
     def transcribe_audio(self, audio_data):
         print("Transcribing...")
@@ -151,7 +160,7 @@ class STTApp:
         self.root.geometry(f'+{x}+{y}')
 
     def close_app(self):
-        self.unload_whisper_model()  # Unload the model when the app is closed
+        self.unload_whisper_model()
         self.root.quit()
 
 # Run the app
