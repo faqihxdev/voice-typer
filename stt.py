@@ -9,13 +9,7 @@ import threading
 import torch
 import time
 
-# Check for CUDA
-print(f"PyTorch version: {torch.__version__}")
-print(f"CUDA available: {torch.cuda.is_available()}")
-if torch.cuda.is_available():
-    print(f"CUDA version: {torch.version.cuda}")
-    print(f"Current CUDA device: {torch.cuda.current_device()}")
-    print(f"CUDA device name: {torch.cuda.get_device_name(0)}")
+
 
 # Define the app class
 class STTApp:
@@ -120,7 +114,6 @@ class STTApp:
 
             # If the audio_data > 3 seconds, then transcribe
             if len(audio_data) * frames / self.samplerate > 3:
-                print("Transcribing...")
                 np_audio_data = np.concatenate(audio_data, axis=0)
                 audio_data = []
                 threading.Thread(target=self.transcribe_audio, args=(np_audio_data,)).start()
