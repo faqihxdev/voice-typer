@@ -83,17 +83,22 @@ class STTApp:
 
     def start_stt(self):
         if not self.is_recording:
+            print("Starting recording...")
             self.is_recording = True
             self.update_status("recording")
             threading.Thread(target=self.record_audio).start()
     
-    def toggle_stt(self):
-        if not self.is_recording:
-            print("Starting recording...")
-            self.start_stt()
-        else:
+    def stop_stt(self):
+        if self.is_recording:
             print("Stopping recording...")
             self.is_recording = False
+            self.update_status("ready")
+    
+    def toggle_stt(self):
+        if not self.is_recording:
+            self.start_stt()
+        else:
+            self.stop_stt()
 
     def record_audio(self):
         print("Recording started...")
@@ -136,15 +141,20 @@ class STTApp:
             transcription = result['text']
             end_time = time.time()
             elapsed_time = end_time - start_time
+
             print(f"Transcription: {transcription}")
+
+            # If transcription contains "stop recording" small or capital, then stop recording
+            if "stop recording" in transcription.lower():
+                self.stop_stt()
+                return
+            
             print(f"Transcription time: {elapsed_time:.2f} seconds")
             self.output_to_active_window(transcription)
         except Exception as e:
             print(f"Error during transcription: {e}")
             print(f"Error type: {type(e)}")
             print(f"Error args: {e.args}")
-        finally:
-            self.update_status("ready")
 
     def output_to_active_window(self, text):
         pyautogui.write(text, interval=0.05)
@@ -163,7 +173,7 @@ class STTApp:
         self.unload_whisper_model()
         self.root.quit()
 
-# Run the app
+# Run the app.
 if __name__ == "__main__":
     root = tk.Tk()
     app = STTApp(root)
