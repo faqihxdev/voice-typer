@@ -22,7 +22,8 @@ class STTUI:
         self.button_grey_img = ImageTk.PhotoImage(Image.open("./assets/button-grey.png").resize(button_img_size, Image.Resampling.LANCZOS))
         self.button_blue_img = ImageTk.PhotoImage(Image.open("./assets/button-blue.png").resize(button_img_size, Image.Resampling.LANCZOS))
         self.settings_icon = ImageTk.PhotoImage(Image.open("./assets/settings.png").resize(button_img_size, Image.Resampling.LANCZOS))
-        
+        self.close_icon = ImageTk.PhotoImage(Image.open("./assets/close.png").resize(button_img_size, Image.Resampling.LANCZOS))
+
         # Create window background
         self.background = tk.Label(root, bd=0, image=self.window_img, width=window_width, height=window_height, background='black')
         self.background.pack(fill="both", expand=True)
@@ -44,7 +45,7 @@ class STTUI:
         # Settings button
         self.settings_button = tk.Button(
             self.background,
-            image=self.settings_icon,  # Set the default grey button image
+            image=self.close_icon,  # Set the default grey button image
             bd=0,
             background='#0E0E0E',
             highlightthickness=0,

@@ -40,6 +40,12 @@ class AudioRecorder:
                 audio_data = []
                 threading.Thread(target=self.transcribe_callback, args=(np_audio_data,)).start()
 
-        with sd.InputStream(callback=callback, channels=1, samplerate=self.samplerate, blocksize=self.chunk_size, dtype='float32'):
+        with sd.InputStream(
+            callback=callback,
+            channels=1,
+            samplerate=self.samplerate,
+            blocksize=self.chunk_size,
+            dtype='float32'
+        ):
             while self.is_recording:
                 sd.sleep(100)
