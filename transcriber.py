@@ -7,10 +7,10 @@ import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 # Check for CUDA
-print(f"[CUDA] PyTorch version: {torch.__version__}")
-print(f"[CUDA] CUDA available: {torch.cuda.is_available()}")
+print(f"[CUDA] Torch Ver: {torch.__version__}")
+print(f"[CUDA] Available?: {torch.cuda.is_available()}")
 if torch.cuda.is_available():
-    print(f"[CUDA] Version: {torch.version.cuda}, Current device: {torch.cuda.current_device()}, Device name: {torch.cuda.get_device_name(0)}")
+    print(f"[CUDA] Ver: {torch.version.cuda} | Device: ({torch.cuda.current_device()}) {torch.cuda.get_device_name(0)}")
 
 class Transcriber:
     def __init__(self):
@@ -18,7 +18,7 @@ class Transcriber:
 
     def load_whisper_model(self):
         device = "cuda" if torch.cuda.is_available() else "cpu"
-        model = whisper.load_model("large-v2", device=device)
+        model = whisper.load_model("medium.en", device=device)
         print(f"[LOG] Model loaded into {device}")
 
         return model
