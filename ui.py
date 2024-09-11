@@ -1,6 +1,5 @@
 from PIL import Image, ImageTk
 import tkinter as tk
-import keyboard
 
 class STTUI:
     def __init__(self, root, toggle_stt_callback, close_app_callback):
@@ -59,9 +58,6 @@ class STTUI:
         # Bind mouse events for window dragging
         self.root.bind("<Button-1>", self.start_move)
         self.root.bind("<B1-Motion>", self.on_move)
-
-        # Add hotkey
-        keyboard.add_hotkey('ctrl+shift+7', toggle_stt_callback)
 
         self._offsetx = 0
         self._offsety = 0
