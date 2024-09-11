@@ -1,8 +1,8 @@
 import tkinter as tk
 from ui import STTUI
-from audio_recorder import AudioRecorder
+from recorder import AudioRecorder
 from transcriber import Transcriber
-from output_handler import OutputHandler
+from typer import OutputHandler
 
 class STTApp:
     def __init__(self, root):
