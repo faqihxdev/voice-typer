@@ -21,11 +21,7 @@ class STTUI:
         button_img_size = (36, 36)
         self.button_grey_img = ImageTk.PhotoImage(Image.open("./assets/button-grey.png").resize(button_img_size, Image.Resampling.LANCZOS))
         self.button_blue_img = ImageTk.PhotoImage(Image.open("./assets/button-blue.png").resize(button_img_size, Image.Resampling.LANCZOS))
-
-        # Resize mic and settings icons to fit within buttons (e.g., 20x20 or adjust accordingly)
-        icon_size = (20, 20)
-        self.mic_icon = ImageTk.PhotoImage(Image.open("./assets/mic.png").resize(icon_size, Image.Resampling.LANCZOS))
-        self.settings_icon = ImageTk.PhotoImage(Image.open("./assets/settings.png").resize(icon_size, Image.Resampling.LANCZOS))
+        self.settings_icon = ImageTk.PhotoImage(Image.open("./assets/settings.png").resize(button_img_size, Image.Resampling.LANCZOS))
         
         # Create window background
         self.background = tk.Label(root, bd=0, image=self.window_img, width=window_width, height=window_height, background='black')
@@ -34,7 +30,7 @@ class STTUI:
         # Mic button
         self.mic_button = tk.Button(
             self.background,
-            image=self.button_grey_img,
+            image=self.button_grey_img,  # Set the default grey button image
             bd=0,
             background='#0E0E0E',
             highlightthickness=0,
@@ -44,21 +40,11 @@ class STTUI:
         )
         
         self.mic_button.place(x=10, y=10)
-        
-        self.mic_icon_label = tk.Button(
-            self.mic_button,
-            image=self.mic_icon,
-            bd=0,
-            bg='#2c2c2c',
-            command=toggle_stt_callback
-        )
-        
-        self.mic_icon_label.place(relx=0.5, rely=0.5, anchor="center")
 
         # Settings button
         self.settings_button = tk.Button(
             self.background,
-            image=self.button_grey_img,
+            image=self.settings_icon,  # Set the default grey button image
             bd=0,
             background='#0E0E0E',
             highlightthickness=0,
@@ -68,16 +54,6 @@ class STTUI:
         )
         
         self.settings_button.place(x=10, y=56)  # 10px from bottom (102 - 36 - 10)
-        
-        self.settings_icon_label = tk.Button(
-            self.settings_button,
-            image=self.settings_icon,
-            bd=0,
-            bg='#2c2c2c',
-            command=close_app_callback
-        )
-        
-        self.settings_icon_label.place(relx=0.5, rely=0.5, anchor="center")
 
         # Bind mouse events for window dragging
         self.root.bind("<Button-1>", self.start_move)
@@ -91,11 +67,9 @@ class STTUI:
 
     def update_status(self, status):
         if status == "ready":
-            self.mic_button.config(image=self.button_grey_img)
-            self.mic_icon_label.config(bg='#2c2c2c')
+            self.mic_button.config(image=self.button_grey_img)  # Reset to grey button
         elif status == "recording":
-            self.mic_button.config(image=self.button_blue_img)
-            self.mic_icon_label.config(bg='#2C46D2')
+            self.mic_button.config(image=self.button_blue_img)  # Change to blue button
         self.root.update()
 
     def start_move(self, event):

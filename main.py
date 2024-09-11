@@ -35,6 +35,7 @@ class STTApp:
         self.ui.update_status("recording")
 
     def close_app(self):
+        self.audio_recorder.stop_recording()
         self.transcriber.unload_model()
         self.ui.root.quit()
 
