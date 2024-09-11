@@ -10,8 +10,12 @@ class STTUI:
         self.root.attributes("-topmost", True)
         self.root.wm_attributes("-transparent", "black")
 
+        window_width = 56  # 36px button + 10px padding on each side
+        window_height = 102  # 36px * 2 buttons + 10px padding top/bottom + 10px between buttons
+        self.root.geometry(f"{window_width}x{window_height}")
+        
         # Load and resize images
-        self.window_img = ImageTk.PhotoImage(Image.open("./assets/window.png"))
+        self.window_img = ImageTk.PhotoImage(Image.open("./assets/window.png").resize((window_width, window_height), Image.Resampling.LANCZOS))
 
         # Resize button images to fit the button dimensions (36x36)
         button_img_size = (36, 36)
@@ -22,12 +26,7 @@ class STTUI:
         icon_size = (20, 20)
         self.mic_icon = ImageTk.PhotoImage(Image.open("./assets/mic.png").resize(icon_size, Image.Resampling.LANCZOS))
         self.settings_icon = ImageTk.PhotoImage(Image.open("./assets/settings.png").resize(icon_size, Image.Resampling.LANCZOS))
-
-        # Adjust window size
-        window_width = 56  # 36px button + 10px padding on each side
-        window_height = 102  # 36px * 2 buttons + 10px padding top/bottom + 10px between buttons
-        self.root.geometry(f"{window_width}x{window_height}")
-
+        
         # Create window background
         self.background = tk.Label(root, bd=0, image=self.window_img, width=window_width, height=window_height, background='black')
         self.background.pack(fill="both", expand=True)
@@ -96,7 +95,7 @@ class STTUI:
             self.mic_icon_label.config(bg='#2c2c2c')
         elif status == "recording":
             self.mic_button.config(image=self.button_blue_img)
-            self.mic_icon_label.config(bg='#007ACC')
+            self.mic_icon_label.config(bg='#2C46D2')
         self.root.update()
 
     def start_move(self, event):
