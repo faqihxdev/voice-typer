@@ -8,6 +8,8 @@ A locally run Speech-To-Text voice typer enabled with hotkeys and floating inter
 
 I created this because I couldn't find a free solution that uses a locally run Whisper model (or any speech-to-text model) with a hotkey activation for easy interaction. Even if a solution exists, this was a cool project to work on. A hotkey, like holding Alt+X to record and release to transcribe, is an efficient way to control a speech-to-text model! It can type on any input, so as long as your cursor can access it, you can use VoiceTyper on it. With all the typing we do for LLMs, sometimes we want to explain things in detail, but typing it all out can feel long and tedious. Using voice is faster and more interactive. Now, the next few projects will be built even faster. Let's gooo!
 
+P.S. I've been using it ALOT, maybe too much, hopefully I still remember how to type with a keyboard.
+
 ## Features
 
 - Floating, draggable, minimal mic/close app interface
@@ -24,11 +26,17 @@ I created this because I couldn't find a free solution that uses a locally run W
 
 ## Installation for Users
 
-1. !!! Unfortunately, the exe file is > 2GB, github's max file size for releases.
-2. Download the latest VoiceTyper.exe from the releases page
-3. Run the VoiceTyper.exe file
-4. Allow any necessary permissions when prompted
-5. Hold Alt+X to start/stop recording or interact with the floating microphone interface
+I've only tested it on Windows 11. For others, you're free to try if it works.
+Since the exe file is > 2GB, github's release limit, it's split into 2.
+(1) VoiceTyper.7z.001, and (2) VoiceTyper.7z.002
+
+1. Go to [Releases Page](https://github.com/aqilakmal/Voice-Typer/releases) & Download all files.
+2. Install 7-Zip from [www.7-zip.org](http://www.7-zip.org) if you haven't already.
+3. Right-click on VoiceTyper.7z.001 > Select 7-Zip > Extract Here.
+4. Run the VoiceTyper.exe file
+5. Wait startup & model download, there'll be notifications
+6. In any text field, hold Alt+X to start/stop recording
+7. Press the "X" button on the floating window to quit
 
 ## For Developers
 
@@ -62,7 +70,7 @@ I created this because I couldn't find a free solution that uses a locally run W
 
 ## Issues
 
-* The hot keys (ALT+X)), which is the ideal way to use it works. However, clicking on the record button removes focus from the input the cursor was at. This causes the program to enter characters into the unknown. For now, it's just used as a recording indicator.
+* The hot keys (ALT+X), which is the ideal way to use it works. However, clicking on the record button removes focus from the input the cursor was at. This causes the program to enter characters into the unknown. For now, it's just used as a recording indicator.
 
 ## Disclaimer
 
