@@ -6,7 +6,7 @@ A locally run Speech-To-Text voice typer enabled with hotkeys and floating inter
 
 ## Why?
 
-I created this because I couldn't find a free solution that uses a locally run Whisper model (or any speech-to-text model) with a hotkey for easy interaction. Even if a solution exists, this was a cool project to work on. A hotkey, like holding Alt+X, is a super efficient way to control a speech-to-text model—look at your keys! It can type on any input, so as long as your cursor can access it, you can use VoiceTyper on it. With all the typing we do for LLMs, sometimes we want to explain things in detail, but typing it all out can feel long and tedious. Using voice is faster and more interactive. Now, the next few projects will be built even faster. Let's gooo!
+I created this because I couldn't find a free solution that uses a locally run Whisper model (or any speech-to-text model) with a hotkey activation for easy interaction. Even if a solution exists, this was a cool project to work on. A hotkey, like holding Alt+X to record and release to transcribe, is an efficient way to control a speech-to-text model! It can type on any input, so as long as your cursor can access it, you can use VoiceTyper on it. With all the typing we do for LLMs, sometimes we want to explain things in detail, but typing it all out can feel long and tedious. Using voice is faster and more interactive. Now, the next few projects will be built even faster. Let's gooo!
 
 ## Features
 
@@ -22,12 +22,13 @@ I created this because I couldn't find a free solution that uses a locally run W
 - At least 10GB of VRAM (for GPU acceleration)
 - Microphone
 
-## Installation for Users (TBD)
+## Installation for Users
 
-1. Download the latest VoiceTyper.exe from the releases page
-2. Run the VoiceTyper.exe file
-3. Allow any necessary permissions when prompted
-4. Hold Alt+X to start/stop recording or interact with the floating microphone interface
+1. !!! Unfortunately, the exe file is > 2GB, github's max file size for releases.
+2. Download the latest VoiceTyper.exe from the releases page
+3. Run the VoiceTyper.exe file
+4. Allow any necessary permissions when prompted
+5. Hold Alt+X to start/stop recording or interact with the floating microphone interface
 
 ## For Developers
 
