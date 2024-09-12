@@ -5,9 +5,29 @@ import win32gui
 import win32con
 import win32api
 import platform
+import torch
+from datetime import datetime
 from plyer import notification
 
 class_atom = None
+
+# Used to log the application's output (prints, tqdm, etc.) to a file
+# pyinstaller --noconsole results in stdout error without this
+def setup_logging():
+    logs_dir = os.path.join(os.getcwd(), "logs")
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+
+    current_time = datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S")
+    log_file_name = f"app.{current_time}_UTC.log"
+    log_file_path = os.path.join(logs_dir, log_file_name)
+
+    log_file = open(log_file_path, "w")
+    sys.stdout = log_file
+    sys.stderr = log_file
+
+    print(f"[INFO] Logging started at {current_time} UTC")
+    print("[INFO] Application is running...")
 
 # Windows-specific notification function
 def notify_in_windows(title, message, app_name="App", app_icon=None, timeout=10):
@@ -87,3 +107,10 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
+
+def check_cuda():
+    print(f"[CUDA] Torch {torch.__version__}")
+    if torch.cuda.is_available():
+        print(f"[CUDA] Ver {torch.version.cuda} | Device {torch.cuda.current_device()} {torch.cuda.get_device_name(0)}")
+    else:
+        print("[CUDA] Not Available")

@@ -4,6 +4,10 @@ from recorder import AudioRecorder
 from transcriber import Transcriber
 from typer import OutputHandler
 import keyboard
+import warnings
+from utils import setup_logging, check_cuda
+
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 class STTApp:
     def __init__(self, root):
@@ -61,6 +65,8 @@ class STTApp:
         self.ui.root.quit()
 
 if __name__ == "__main__":
+    setup_logging()
+    check_cuda()
     root = tk.Tk()
     app = STTApp(root)
     root.mainloop()
