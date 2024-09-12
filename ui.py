@@ -37,7 +37,9 @@ class STTUI:
             highlightthickness=0,
             width=36,
             height=36,
-            command=toggle_stt_callback
+            # TODO: Fix defocus of cursor when mic is pressed
+            # For now, disabled
+            # command=toggle_stt_callback
         )
         
         self.mic_button.place(x=10, y=10)

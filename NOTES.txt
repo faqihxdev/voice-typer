@@ -2,3 +2,12 @@
   - Indonesian in the background
   - I said "Testing Audio Recording"
   - It transcribed as "Mencoba merekam audio"
+
+- The folder "env/Lib/site-packages/whisper/assets" contains:
+  - mel_filters.npz
+  - gpt2.tiktoken
+  - multilingual.tiktoken
+
+- The setup_logging() function is used to log the application's output (prints, tqdm, etc.) to a file
+  - pyinstaller --noconsole results in stdout error without this
+

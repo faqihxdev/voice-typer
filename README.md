@@ -1,6 +1,6 @@
 # Voice Typer
 
-<img src="./public/ss.png" alt="Screenshot" style="max-width: 500px;">
+<img src="./docs/ss.png" alt="Screenshot" style="max-width: 500px;">
 
 A locally run Speech-To-Text voice typer enabled with hotkeys and floating interface for effortless voice typing, powered by the publicly available OpenAI Whisper model.
 
@@ -10,11 +10,11 @@ I created this because I couldn't find a free solution that uses a locally run W
 
 ## Features
 
-- Floating, draggable microphone interface
+- Floating, draggable, minimal mic/close app interface
 - Speech-to-text transcription using OpenAI's Whisper model
 - Automatic output of transcribed text to the active window
 - Global hotkey hold (Alt+X) to start/stop recording
-- Press the "X" icon on the floating window to quit
+- Press the "X" button on the floating window to quit
 
 ## Requirements
 

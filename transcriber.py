@@ -3,17 +3,7 @@ import whisper
 import torch
 import time
 import numpy as np
-import warnings
 from utils import send_notification
-
-warnings.filterwarnings("ignore", category=FutureWarning)
-
-# Check for CUDA
-print(f"[CUDA] Torch {torch.__version__}")
-if torch.cuda.is_available():
-    print(f"[CUDA] Ver {torch.version.cuda} | Device {torch.cuda.current_device()} {torch.cuda.get_device_name(0)}")
-else:
-    print("[CUDA] Not Available")
 
 class Transcriber:
     def __init__(self):
