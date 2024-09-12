@@ -11,3 +11,8 @@
 - The setup_logging() function is used to log the application's output (prints, tqdm, etc.) to a file
   - pyinstaller --noconsole results in stdout error without this
 
+- Potential Future Features:
+  - Add a GUI for configuration
+    - Model choice
+    - Language choice
+    - Output format choice
