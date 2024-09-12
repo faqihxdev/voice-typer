@@ -1,5 +1,6 @@
 from PIL import Image, ImageTk
 import tkinter as tk
+from utils import resource_path
 
 class STTUI:
     def __init__(self, root, toggle_stt_callback, close_app_callback):
@@ -14,14 +15,14 @@ class STTUI:
         self.root.geometry(f"{window_width}x{window_height}")
         
         # Load and resize images
-        self.window_img = ImageTk.PhotoImage(Image.open("./assets/window.png").resize((window_width, window_height), Image.Resampling.LANCZOS))
+        self.window_img = ImageTk.PhotoImage(Image.open(resource_path("./assets/window.png")).resize((window_width, window_height), Image.Resampling.LANCZOS))
 
         # Resize button images to fit the button dimensions (36x36)
         button_img_size = (36, 36)
-        self.button_grey_img = ImageTk.PhotoImage(Image.open("./assets/button-grey.png").resize(button_img_size, Image.Resampling.LANCZOS))
-        self.button_blue_img = ImageTk.PhotoImage(Image.open("./assets/button-blue.png").resize(button_img_size, Image.Resampling.LANCZOS))
-        self.settings_icon = ImageTk.PhotoImage(Image.open("./assets/settings.png").resize(button_img_size, Image.Resampling.LANCZOS))
-        self.close_icon = ImageTk.PhotoImage(Image.open("./assets/close.png").resize(button_img_size, Image.Resampling.LANCZOS))
+        self.button_grey_img = ImageTk.PhotoImage(Image.open(resource_path("./assets/button-grey.png")).resize(button_img_size, Image.Resampling.LANCZOS))
+        self.button_blue_img = ImageTk.PhotoImage(Image.open(resource_path("./assets/button-blue.png")).resize(button_img_size, Image.Resampling.LANCZOS))
+        self.settings_icon = ImageTk.PhotoImage(Image.open(resource_path("./assets/settings.png")).resize(button_img_size, Image.Resampling.LANCZOS))
+        self.close_icon = ImageTk.PhotoImage(Image.open(resource_path("./assets/close.png")).resize(button_img_size, Image.Resampling.LANCZOS))
 
         # Create window background
         self.background = tk.Label(root, bd=0, image=self.window_img, width=window_width, height=window_height, background='black')

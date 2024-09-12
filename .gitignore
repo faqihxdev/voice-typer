@@ -1,2 +1,7 @@
 env
+models
+dist
+build
 __pycache__
+.cursorignore
+VoiceTyper.spec
