@@ -1,4 +1,4 @@
-- Whisper model auto translate
+- Whisper model auto translate (large)
   - Indonesian in the background
   - I said "Testing Audio Recording"
   - It transcribed as "Mencoba merekam audio"

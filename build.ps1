@@ -17,4 +17,5 @@ if (Test-Path "./VoiceTyper.spec") {
 }
 
 # Run PyInstaller to build the executable
-pyinstaller --onefile --icon="assets/app.ico" --name="VoiceTyper" --add-data "assets;assets" --noconsole main.py
+# pyinstaller --onefile --icon="assets/app.ico" --name="VoiceTyper" --add-data "assets;assets" --noconsole main.py
+pyinstaller --onefile --icon="assets/app.ico" --name="VoiceTyper" --add-data "assets;assets" --add-data "env/Lib/site-packages/whisper/assets/mel_filters.npz;whisper/assets" --add-data "env/Lib/site-packages/whisper/assets/gpt2.tiktoken;whisper/assets" --add-data "env/Lib/site-packages/whisper/assets/multilingual.tiktoken;whisper/assets" main.py
