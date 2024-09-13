@@ -20,21 +20,25 @@ P.S. I've been using it ALOT, maybe too much, hopefully I still remember how to 
 
 ## Requirements
 
-- Windows 10 or later
-- At least 10GB of VRAM (for GPU acceleration)
 - Microphone
+- Windows 10 or later
+- At least 4GB of VRAM (for GPU acceleration)
+- Note: Hardware will determine the transcription performance.
 
 ## Installation for Users
 
-I've only tested it on Windows 11. For others, you're free to try if it works.
-Since the exe file is > 2GB, github's release limit, it's split into 2.
-(1) VoiceTyper.7z.001, and (2) VoiceTyper.7z.002
+* I've only tested it on Windows 11. For others, you're free to try if it works.
+* Since the exe file is > 2GB, github's release limit, it's split into 2.
+* (1) VoiceTyper.7z.001, and (2) VoiceTyper.7z.002
 
 1. Go to [Releases Page](https://github.com/aqilakmal/Voice-Typer/releases) & Download all files.
 2. Install 7-Zip from [www.7-zip.org](http://www.7-zip.org) if you haven't already.
 3. Right-click on VoiceTyper.7z.001 > Select 7-Zip > Extract Here.
 4. Run the VoiceTyper.exe file
 5. Wait startup & model download, there'll be notifications
+   1. Startup (~5-30s)
+   2. Model Download (For first time users) (~1m-5m)
+   3. Waiting times will vary between hardwares & internet connections
 6. In any text field, hold Alt+X to start/stop recording
 7. Press the "X" button on the floating window to quit
 
