@@ -15,7 +15,7 @@ class Transcriber:
         os.makedirs(models_dir, exist_ok=True)
 
         # Check if the model file exists before downloading
-        model_file_path = os.path.join(models_dir, "medium.en.pt")  # The filename may vary depending on whisper's implementation
+        model_file_path = os.path.join(models_dir, "large.pt")  # The filename may vary depending on whisper's implementation
 
         if not os.path.exists(model_file_path):
             # Notify the user that the model is being downloaded
@@ -25,7 +25,7 @@ class Transcriber:
             )
         
         # Load the model (downloads if not present)
-        model = whisper.load_model("medium.en", device=device, download_root=models_dir)
+        model = whisper.load_model("large", device=device, download_root=models_dir)
         
         # If the model was downloaded, send another notification
         if not os.path.exists(model_file_path):
