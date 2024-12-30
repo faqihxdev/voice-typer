@@ -1,18 +1,21 @@
-- Whisper model auto translate (large)
-  - Indonesian in the background
-  - I said "Testing Audio Recording"
-  - It transcribed as "Mencoba merekam audio"
+# Model Testing
+- Whisper Model (Large) Translation Test:
+  - Input: "Testing Audio Recording" (English)
+  - Output: "Mencoba merekam audio" (Indonesian)
+  - Note: Indonesian was running in background
 
-- The folder "env/Lib/site-packages/whisper/assets" contains:
+# Technical Details
+- Whisper Assets Location (env/Lib/site-packages/whisper/assets):
   - mel_filters.npz
-  - gpt2.tiktoken
+  - gpt2.tiktoken 
   - multilingual.tiktoken
 
-- The setup_logging() function is used to log the application's output (prints, tqdm, etc.) to a file
-  - pyinstaller --noconsole results in stdout error without this
+- Logging Implementation:
+  - setup_logging() captures application output (prints, tqdm)
+  - Required for pyinstaller --noconsole to avoid stdout errors
 
-- Potential Future Features:
-  - Add a GUI for configuration
-    - Model choice
-    - Language choice
-    - Output format choice
+# Future Enhancements
+- Configuration GUI:
+  - Model selection
+  - Language preferences  
+  - Output format options
